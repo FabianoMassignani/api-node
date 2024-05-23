@@ -1,17 +1,21 @@
 "use strict";
-const person = [
-    ["John", 30],
-    ["Jane", 25],
-    ["Jim", 20],
-];
-person.forEach(([name, age]) => {
-    console.log(`${name} is ${age} years old`);
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const cors_1 = __importDefault(require("cors"));
+const database_1 = __importDefault(require("./config/database"));
+const secrets_1 = require("./secrets");
+const routes_1 = __importDefault(require("./routes"));
+const errorMidleware_1 = require("./middlewares/errorMidleware");
+const app = (0, express_1.default)();
+(0, database_1.default)();
+app.use((0, cors_1.default)());
+app.use(express_1.default.json());
+app.use(routes_1.default);
+app.use(errorMidleware_1.errorMidleware);
+app.listen(secrets_1.PORT, () => {
+    console.log(`Server rodando na porta ${secrets_1.PORT}`);
 });
-var Color;
-(function (Color) {
-    Color[Color["Red"] = 1] = "Red";
-    Color[Color["Green"] = 2] = "Green";
-    Color[Color["Blue"] = 3] = "Blue";
-})(Color || (Color = {}));
-const color = Color.Green;
-console.log(color); // 2
+//# sourceMappingURL=index.js.map

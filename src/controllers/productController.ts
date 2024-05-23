@@ -1,13 +1,14 @@
 import { Request, Response, NextFunction } from "express";
 import { BadRequestException } from "../exceptions/bad-request";
+import { NotFoundException } from "../exceptions/not-found";
 import { ErrorCode } from "../exceptions/root";
 import productService from "../services/productService";
 
 class ProductController {
   public getproducts = async (
-    req: Request,
+    _req: Request,
     res: Response,
-    next: NextFunction
+    _next: NextFunction
   ) => {
     const products = await productService.findAllProducts();
 
@@ -29,6 +30,13 @@ class ProductController {
     }
 
     const product = await productService.findProductById(id);
+
+    if (!product) {
+      throw new NotFoundException(
+        "Produto não encontrado",
+        ErrorCode.NOT_FOUND
+      );
+    }
 
     res.status(200).json({ data: product });
   };
