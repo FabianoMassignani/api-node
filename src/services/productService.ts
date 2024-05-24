@@ -2,32 +2,24 @@ import ProductRepository from "../repositorys/ProductRepository";
 import { CreateProductsDto } from "../dtos/CreateProductsDto";
 import IProductRepository from "../repositorys/IProductRepository";
 
-class ProductService {
-  private productRepository: IProductRepository;
+const productRepository: IProductRepository = ProductRepository;
 
-  constructor() {
-    this.productRepository = new ProductRepository();
-  }
+export const findAllProducts = async () => {
+  return await productRepository.findAll();
+};
 
-  public async findAllProducts() {
-    return this.productRepository.findAll();
-  }
+export const findProductById = async (id: string) => {
+  return await productRepository.findById(id);
+};
 
-  public async findProductById(id: string) {
-    return this.productRepository.findById(id);
-  }
+export const createProduct = async (data: CreateProductsDto) => {
+  return await productRepository.create(data);
+};
 
-  public async createProduct(data: CreateProductsDto) {
-    return this.productRepository.create(data);
-  }
+export const updateProduct = async (id: string, data: CreateProductsDto) => {
+  return await productRepository.update(id, data);
+};
 
-  public async updateProduct(id: string, data: CreateProductsDto) {
-    return this.productRepository.update(id, data);
-  }
-
-  public async deleteProduct(id: string) {
-    return this.productRepository.delete(id);
-  }
-}
-
-export default new ProductService();
+export const deleteProduct = async (id: string) => {
+  return await productRepository.delete(id);
+};

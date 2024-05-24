@@ -2,100 +2,85 @@ import { Request, Response, NextFunction } from "express";
 import { BadRequestException } from "../exceptions/bad-request";
 import { NotFoundException } from "../exceptions/not-found";
 import { ErrorCode } from "../exceptions/root";
-import productService from "../services/productService";
+import * as productService from "../services/productService";
 
-class ProductController {
-  public getproducts = async (
-    _req: Request,
-    res: Response,
-    _next: NextFunction
-  ) => {
-    const products = await productService.findAllProducts();
+export const getProducts = async (
+  _req: Request,
+  res: Response,
+  _next: NextFunction
+) => {
+  const products = await productService.findAllProducts();
 
-    res.status(200).json({ data: products });
-  };
+  res.status(200).json({ data: products });
+};
 
-  public getproductById = async (
-    req: Request,
-    res: Response,
-    _next: NextFunction
-  ) => {
-    const { id } = req.params;
+export const getProductById = async (
+  req: Request,
+  res: Response,
+  _next: NextFunction
+) => {
+  const { id } = req.params;
 
-    if (!id) {
-      throw new BadRequestException(
-        "Id não informado",
-        ErrorCode.INVALID_PARAMS
-      );
-    }
+  if (!id) {
+    throw new BadRequestException("Id não informado", ErrorCode.INVALID_PARAMS);
+  }
 
-    const product = await productService.findProductById(id);
+  const product = await productService.findProductById(id);
 
-    if (!product) {
-      throw new NotFoundException(
-        "Produto não encontrado",
-        ErrorCode.NOT_FOUND
-      );
-    }
+  if (!product) {
+    throw new NotFoundException("Produto não encontrado", ErrorCode.NOT_FOUND);
+  }
 
-    res.status(200).json({ data: product });
-  };
+  res.status(200).json({ data: product });
+};
 
-  public createproduct = async (
-    req: Request,
-    res: Response,
-    _next: NextFunction
-  ) => {
-    const { nome, descricao, preco, quantidade } = req.body;
+export const createProduct = async (
+  req: Request,
+  res: Response,
+  _next: NextFunction
+) => {
+  const { nome, descricao, preco, quantidade } = req.body;
 
-    if (!nome || !descricao || !preco || !quantidade) {
-      throw new BadRequestException(
-        "Campos obrigatórios não informados",
-        ErrorCode.INVALID_PARAMS
-      );
-    }
+  if (!nome || !descricao || !preco || !quantidade) {
+    throw new BadRequestException(
+      "Campos obrigatórios não informados",
+      ErrorCode.INVALID_PARAMS
+    );
+  }
 
-    const product = await productService.createProduct(req.body);
+  const product = await productService.createProduct(req.body);
 
-    res.status(201).json({ data: product, message: "Criado com sucesso" });
-  };
+  res.status(201).json({ data: product, message: "Criado com sucesso" });
+};
 
-  public updateproduct = async (
-    req: Request,
-    res: Response,
-    _next: NextFunction
-  ) => {
-    const { id } = req.params;
+export const updateProduct = async (
+  req: Request,
+  res: Response,
+  _next: NextFunction
+) => {
+  const { id } = req.params;
 
-    if (!id) {
-      throw new BadRequestException(
-        "Id não informado",
-        ErrorCode.INVALID_PARAMS
-      );
-    }
-    const product = await productService.updateProduct(id, req.body);
+  if (!id) {
+    throw new BadRequestException("Id não informado", ErrorCode.INVALID_PARAMS);
+  }
 
-    res.status(200).json({ data: product, message: "Atualizado com sucesso" });
-  };
+  const product = await productService.updateProduct(id, req.body);
 
-  public deleteproduct = async (
-    req: Request,
-    res: Response,
-    _next: NextFunction
-  ) => {
-    const { id } = req.params;
+  res.status(200).json({ data: product, message: "Atualizado com sucesso" });
+};
 
-    if (!id) {
-      throw new BadRequestException(
-        "Id não informado",
-        ErrorCode.INVALID_PARAMS
-      );
-    }
+export const deleteProduct = async (
+  req: Request,
+  res: Response,
+  _next: NextFunction
+) => {
+  const { id } = req.params;
 
-    const product = await productService.deleteProduct(id);
+  if (!id) {
+    throw new BadRequestException("Id não informado", ErrorCode.INVALID_PARAMS);
+  }
 
-    res.status(200).json({ data: product, message: "Deletado com sucesso" });
-  };
-}
+  const product = await productService.deleteProduct(id);
 
-export default ProductController;
+  res.status(200).json({ data: product, message: "Deletado com sucesso" });
+};
