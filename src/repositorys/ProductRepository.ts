@@ -5,17 +5,20 @@ import IProductRepository from "./IProductRepository";
 const ProductRepository: IProductRepository = {
   async findAll(): Promise<product[]> {
     const products = await product.find();
+
     return products;
   },
 
   async findById(id: string): Promise<product | null> {
     const foundProduct = await product.findById(id);
+
     return foundProduct;
   },
 
   async create(data: CreateProductsDto): Promise<product> {
     const newProduct = new product(data);
     await newProduct.save();
+    
     return newProduct;
   },
 

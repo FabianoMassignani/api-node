@@ -27,10 +27,6 @@ export const getProductById = async (
 
   const product = await productService.findProductById(id);
 
-  if (!product) {
-    throw new NotFoundException("Produto não encontrado", ErrorCode.NOT_FOUND);
-  }
-
   res.status(200).json({ data: product });
 };
 
@@ -69,9 +65,16 @@ export const createProduct = async (
     );
   }
 
-  const product = await productService.createProduct(req.body);
+  let product = {
+    nome: nome,
+    descricao: descricao,
+    preco: preco,
+    quantidade: quantidade,
+  };
 
-  res.status(201).json({ data: product, message: "Criado com sucesso" });
+  const productCreate = await productService.createProduct(product);
+
+  res.status(201).json({ data: productCreate, message: "Criado com sucesso" });
 };
 
 export const updateProduct = async (
@@ -85,9 +88,48 @@ export const updateProduct = async (
     throw new BadRequestException("Id não informado", ErrorCode.INVALID_PARAMS);
   }
 
-  const product = await productService.updateProduct(id, req.body);
+  const { nome, descricao, preco, quantidade } = req.body;
 
-  res.status(200).json({ data: product, message: "Atualizado com sucesso" });
+  if (!nome) {
+    throw new BadRequestException(
+      "Nome não informado",
+      ErrorCode.INVALID_PARAMS
+    );
+  }
+
+  if (!descricao) {
+    throw new BadRequestException(
+      "Descrição não informada",
+      ErrorCode.INVALID_PARAMS
+    );
+  }
+
+  if (!preco) {
+    throw new BadRequestException(
+      "Preço não informado",
+      ErrorCode.INVALID_PARAMS
+    );
+  }
+
+  if (!quantidade) {
+    throw new BadRequestException(
+      "Quantidade não informada",
+      ErrorCode.INVALID_PARAMS
+    );
+  }
+
+  let product = {
+    nome: nome,
+    descricao: descricao,
+    preco: preco,
+    quantidade: quantidade,
+  };
+
+  const productUpdate = await productService.updateProduct(id, product);
+
+  res
+    .status(200)
+    .json({ data: productUpdate, message: "Atualizado com sucesso" });
 };
 
 export const deleteProduct = async (

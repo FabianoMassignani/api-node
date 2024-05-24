@@ -1,6 +1,8 @@
 import ProductRepository from "../repositorys/ProductRepository";
 import { CreateProductsDto, UpdateProductDto } from "../dtos/CreateProductsDto";
 import IProductRepository from "../repositorys/IProductRepository";
+import { NotFoundException } from "../exceptions/not-found";
+import { ErrorCode } from "../exceptions/root";
 
 const productRepository: IProductRepository = ProductRepository;
 
@@ -9,7 +11,13 @@ export const findAllProducts = async () => {
 };
 
 export const findProductById = async (id: string) => {
-  return await productRepository.findById(id);
+  const product = await productRepository.findById(id);
+
+  if (!product) {
+    throw new NotFoundException("Produto não encontrado", ErrorCode.NOT_FOUND);
+  }
+
+  return product;
 };
 
 export const createProduct = async (data: CreateProductsDto) => {
