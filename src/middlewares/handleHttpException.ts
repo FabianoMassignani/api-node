@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { HttpException } from "../exceptions/root";
 
-export const errorMidleware = (
+export const handleHttpException = (
   error: HttpException,
   _req: Request,
   res: Response,

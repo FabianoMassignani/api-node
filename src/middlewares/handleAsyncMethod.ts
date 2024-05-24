@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { InternalException } from "../exceptions/internal-exception";
 import { ErrorCode, HttpException } from "../exceptions/root";
 
-export const errorHandler = (method: Function) => {
+export const handleAsyncMethod = (method: Function) => {
   return async (req: Request, res: Response, next: NextFunction) => {
     try {
       await method(req, res, next);

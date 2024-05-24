@@ -3,7 +3,7 @@ import cors from "cors";
 import connectDB from "./config/database";
 import { PORT } from "./secrets";
 import routes from "./routes";
-import { errorMidleware } from "./middlewares/errorMidleware";
+import { handleHttpException } from "./middlewares/handleHttpException";
 
 const app: Express = express();
 
@@ -12,7 +12,7 @@ connectDB();
 app.use(cors());
 app.use(express.json());
 app.use(routes);
-app.use(errorMidleware);
+app.use(handleHttpException);
 
 app.listen(PORT, () => {
   console.log(`Server rodando na porta ${PORT}`);

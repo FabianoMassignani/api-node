@@ -6,14 +6,14 @@ import {
   deleteProduct,
   updateProduct,
 } from "../controllers/productController";
-import { errorHandler } from "../middlewares/errorHandler";
+import { handleAsyncMethod } from "../middlewares/handleAsyncMethod";
 
 const router: Router = Router();
 
-router.get("/", errorHandler(getProducts));
-router.get("/getById/:id", errorHandler(getProductById));
-router.post("/", errorHandler(createProduct));
-router.put("/:id", errorHandler(updateProduct));
-router.delete("/:id", errorHandler(deleteProduct));
+router.get("/", handleAsyncMethod(getProducts));
+router.get("/getById/:id", handleAsyncMethod(getProductById));
+router.post("/", handleAsyncMethod(createProduct));
+router.put("/:id", handleAsyncMethod(updateProduct));
+router.delete("/:id", handleAsyncMethod(deleteProduct));
 
 export default router;
