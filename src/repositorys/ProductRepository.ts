@@ -1,4 +1,4 @@
-import { CreateProductsDto } from "../dtos/CreateProductsDto";
+import { CreateProductsDto, UpdateProductDto } from "../dtos/CreateProductsDto";
 import product from "../models/product";
 import IProductRepository from "./IProductRepository";
 
@@ -19,21 +19,25 @@ const ProductRepository: IProductRepository = {
     return newProduct;
   },
 
-  async update(id: string, data: CreateProductsDto): Promise<product | null> {
+  async update(id: string, data: UpdateProductDto): Promise<product | null> {
     const updatedProduct = await product.findByIdAndUpdate(id, data, {
       new: true,
     });
+
     if (!updatedProduct) {
       throw new Error("Product not found");
     }
+
     return updatedProduct;
   },
 
   async delete(id: string): Promise<product | null> {
     const deletedProduct = await product.findByIdAndDelete(id);
+
     if (!deletedProduct) {
       throw new Error("Product not found");
     }
+
     return deletedProduct;
   },
 };

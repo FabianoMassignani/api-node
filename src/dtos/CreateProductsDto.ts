@@ -4,3 +4,10 @@ export interface CreateProductsDto {
   preco: number;
   quantidade: number;
 }
+
+export interface UpdateProductDto {
+  nome?: string;
+  descricao?: string;
+  preco?: number;
+  quantidade?: number;
+}

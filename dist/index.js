@@ -8,13 +8,13 @@ const cors_1 = __importDefault(require("cors"));
 const database_1 = __importDefault(require("./config/database"));
 const secrets_1 = require("./secrets");
 const routes_1 = __importDefault(require("./routes"));
-const errorMidleware_1 = require("./middlewares/errorMidleware");
+const handleHttpException_1 = require("./middlewares/handleHttpException");
 const app = (0, express_1.default)();
 (0, database_1.default)();
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 app.use(routes_1.default);
-app.use(errorMidleware_1.errorMidleware);
+app.use(handleHttpException_1.handleHttpException);
 app.listen(secrets_1.PORT, () => {
     console.log(`Server rodando na porta ${secrets_1.PORT}`);
 });

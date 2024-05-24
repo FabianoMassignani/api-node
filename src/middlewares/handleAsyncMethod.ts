@@ -12,6 +12,8 @@ export const handleAsyncMethod = (method: Function) => {
       if (error instanceof HttpException) {
         exception = error;
       } else {
+        console.error(error);
+
         exception = new InternalException(
           "Internal Server Error",
           ErrorCode.INTERNAL_SERVER,

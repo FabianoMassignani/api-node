@@ -1,5 +1,5 @@
 import ProductRepository from "../repositorys/ProductRepository";
-import { CreateProductsDto } from "../dtos/CreateProductsDto";
+import { CreateProductsDto, UpdateProductDto } from "../dtos/CreateProductsDto";
 import IProductRepository from "../repositorys/IProductRepository";
 
 const productRepository: IProductRepository = ProductRepository;
@@ -16,7 +16,7 @@ export const createProduct = async (data: CreateProductsDto) => {
   return await productRepository.create(data);
 };
 
-export const updateProduct = async (id: string, data: CreateProductsDto) => {
+export const updateProduct = async (id: string, data: UpdateProductDto) => {
   return await productRepository.update(id, data);
 };
 

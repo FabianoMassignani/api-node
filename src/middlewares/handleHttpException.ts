@@ -9,6 +9,6 @@ export const handleHttpException = (
 ) => {
   res.status(error.statusCode).json({
     message: error.message,
-    errorCode: error.errorCode,
+    code: error.errorCode,
   });
 };

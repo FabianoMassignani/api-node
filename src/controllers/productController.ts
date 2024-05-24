@@ -8,7 +8,7 @@ export const getProducts = async (
   _req: Request,
   res: Response,
   _next: NextFunction
-) => {
+): Promise<void> => {
   const products = await productService.findAllProducts();
 
   res.status(200).json({ data: products });
@@ -18,7 +18,7 @@ export const getProductById = async (
   req: Request,
   res: Response,
   _next: NextFunction
-) => {
+): Promise<void> => {
   const { id } = req.params;
 
   if (!id) {
@@ -38,12 +38,33 @@ export const createProduct = async (
   req: Request,
   res: Response,
   _next: NextFunction
-) => {
+): Promise<void> => {
   const { nome, descricao, preco, quantidade } = req.body;
 
-  if (!nome || !descricao || !preco || !quantidade) {
+  if (!nome) {
     throw new BadRequestException(
-      "Campos obrigatórios não informados",
+      "Nome não informado",
+      ErrorCode.INVALID_PARAMS
+    );
+  }
+
+  if (!descricao) {
+    throw new BadRequestException(
+      "Descrição não informada",
+      ErrorCode.INVALID_PARAMS
+    );
+  }
+
+  if (!preco) {
+    throw new BadRequestException(
+      "Preço não informado",
+      ErrorCode.INVALID_PARAMS
+    );
+  }
+
+  if (!quantidade) {
+    throw new BadRequestException(
+      "Quantidade não informada",
       ErrorCode.INVALID_PARAMS
     );
   }
@@ -57,7 +78,7 @@ export const updateProduct = async (
   req: Request,
   res: Response,
   _next: NextFunction
-) => {
+): Promise<void> => {
   const { id } = req.params;
 
   if (!id) {
@@ -73,7 +94,7 @@ export const deleteProduct = async (
   req: Request,
   res: Response,
   _next: NextFunction
-) => {
+): Promise<void> => {
   const { id } = req.params;
 
   if (!id) {
