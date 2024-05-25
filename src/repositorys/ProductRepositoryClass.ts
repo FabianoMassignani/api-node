@@ -1,6 +1,9 @@
-import { CreateProductsDto, UpdateProductDto } from "../dtos/CreateProductsDto";
+import {
+  CreateProductsDto,
+  UpdateProductDto,
+} from "../interfaces/products.interface";
+import { IProductRepository } from "../repositorys/IProductRepository";
 import product from "../models/product";
-import IProductRepository from "./IProductRepository";
 import { NotFoundException } from "../exceptions/not-found";
 import { ErrorCode } from "../exceptions/root";
 

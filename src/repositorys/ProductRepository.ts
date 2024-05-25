@@ -1,8 +1,8 @@
 import {
   CreateProductsDto,
   UpdateProductDto,
-  IProductRepository,
-} from "../repositorys/IProductRepository";
+} from "../interfaces/products.interface";
+import { IProductRepository } from "../repositorys/IProductRepository";
 import product from "../models/product";
 
 const ProductRepository: IProductRepository = {

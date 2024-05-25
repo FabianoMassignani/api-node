@@ -1,18 +1,8 @@
 import product from "../models/product";
-
-export interface CreateProductsDto {
-  nome: string;
-  descricao: string;
-  preco: number;
-  quantidade: number;
-}
-
-export interface UpdateProductDto {
-  nome?: string;
-  descricao?: string;
-  preco?: number;
-  quantidade?: number;
-}
+import {
+  CreateProductsDto,
+  UpdateProductDto,
+} from "../interfaces/products.interface";
 
 export interface IProductRepository {
   create(data: CreateProductsDto): Promise<product>;
