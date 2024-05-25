@@ -1,7 +1,20 @@
-import { CreateProductsDto, UpdateProductDto } from "../dtos/CreateProductsDto";
 import product from "../models/product";
 
-export default interface IProductRepository {
+export interface CreateProductsDto {
+  nome: string;
+  descricao: string;
+  preco: number;
+  quantidade: number;
+}
+
+export interface UpdateProductDto {
+  nome?: string;
+  descricao?: string;
+  preco?: number;
+  quantidade?: number;
+}
+
+export interface IProductRepository {
   create(data: CreateProductsDto): Promise<product>;
   findAll(): Promise<product[]>;
   findById(id: string): Promise<product | null>;

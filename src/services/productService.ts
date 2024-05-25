@@ -1,6 +1,10 @@
 import ProductRepository from "../repositorys/ProductRepository";
-import { CreateProductsDto, UpdateProductDto } from "../dtos/CreateProductsDto";
-import IProductRepository from "../repositorys/IProductRepository";
+import {
+  CreateProductsDto,
+  UpdateProductDto,
+  IProductRepository,
+} from "../repositorys/IProductRepository";
+
 import { NotFoundException } from "../exceptions/not-found";
 import { ErrorCode } from "../exceptions/root";
 

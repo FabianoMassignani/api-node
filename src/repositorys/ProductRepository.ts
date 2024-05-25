@@ -1,6 +1,9 @@
-import { CreateProductsDto, UpdateProductDto } from "../dtos/CreateProductsDto";
+import {
+  CreateProductsDto,
+  UpdateProductDto,
+  IProductRepository,
+} from "../repositorys/IProductRepository";
 import product from "../models/product";
-import IProductRepository from "./IProductRepository";
 
 const ProductRepository: IProductRepository = {
   async findAll(): Promise<product[]> {
@@ -18,7 +21,7 @@ const ProductRepository: IProductRepository = {
   async create(data: CreateProductsDto): Promise<product> {
     const newProduct = new product(data);
     await newProduct.save();
-    
+
     return newProduct;
   },
 
