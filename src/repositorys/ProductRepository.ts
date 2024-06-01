@@ -1,7 +1,7 @@
 import {
   CreateProductsDto,
   UpdateProductDto,
-} from "../interfaces/products.interface";
+} from "../interfaces/products/products.interface";
 import { IProductRepository } from "../repositorys/IProductRepository";
 import product from "../models/product";
 

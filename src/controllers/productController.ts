@@ -1,10 +1,9 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response } from "express";
 import * as productService from "../services/productService";
 
 export const getProducts = async (
   _req: Request,
-  res: Response,
-  _next: NextFunction
+  res: Response
 ): Promise<void> => {
   const products = await productService.findAllProducts();
 
@@ -13,8 +12,7 @@ export const getProducts = async (
 
 export const getProductById = async (
   req: Request,
-  res: Response,
-  _next: NextFunction
+  res: Response
 ): Promise<void> => {
   const { id } = req.params;
 
@@ -25,8 +23,7 @@ export const getProductById = async (
 
 export const createProduct = async (
   req: Request,
-  res: Response,
-  _next: NextFunction
+  res: Response
 ): Promise<void> => {
   const data = req.body;
 
@@ -37,8 +34,7 @@ export const createProduct = async (
 
 export const updateProduct = async (
   req: Request,
-  res: Response,
-  _next: NextFunction
+  res: Response
 ): Promise<void> => {
   const { id } = req.params;
   const data = req.body;
@@ -52,8 +48,7 @@ export const updateProduct = async (
 
 export const deleteProduct = async (
   req: Request,
-  res: Response,
-  _next: NextFunction
+  res: Response
 ): Promise<void> => {
   const { id } = req.params;
 

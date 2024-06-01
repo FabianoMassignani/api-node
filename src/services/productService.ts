@@ -2,7 +2,7 @@ import ProductRepository from "../repositorys/ProductRepository";
 import {
   CreateProductsDto,
   UpdateProductDto,
-} from "../interfaces/products.interface";
+} from "../interfaces/products/products.interface";
 import { IProductRepository } from "../repositorys/IProductRepository";
 import { NotFoundException } from "../exceptions/not-found";
 import { ErrorCode } from "../exceptions/root";
@@ -111,7 +111,7 @@ export const updateProduct = async (id: string, data: UpdateProductDto) => {
     quantidade: quantidade,
   };
 
-  return await productRepository.update(id, data);
+  return await productRepository.update(id, product);
 };
 
 export const deleteProduct = async (id: string) => {
